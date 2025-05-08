@@ -1,0 +1,16 @@
+DirectoryIndex index.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Jika request langsung ke root, arahkan ke index.html
+    RewriteRule ^$ index.html [L]
+    
+    # Memastikan file .htaccess tidak dapat diakses langsung
+    <Files .htaccess>
+        Order Allow,Deny
+        Deny from all
+    </Files>
+</IfModule> 

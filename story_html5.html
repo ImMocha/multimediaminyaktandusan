@@ -128,6 +128,24 @@
     if (window.autoSpider && window.vInterfaceObject) {
       document.querySelector('.mobile-load-title-overlay').style.display = 'none';
     }
+    
+    // Menambahkan script untuk memulai presentasi secara otomatis saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', function() {
+      // Pastikan bahwa objek DS dan aplikasi tersedia
+      if (window.DS && typeof window.DS === 'object') {
+        var checkReadyState = setInterval(function() {
+          if (window.DS.app) {
+            clearInterval(checkReadyState);
+            try {
+              // Mencoba memulai presentasi secara otomatis
+              window.DS.app.startPresentation();
+            } catch (e) {
+              console.error("Gagal memulai presentasi secara otomatis:", e);
+            }
+          }
+        }, 100);
+      }
+    });
   </script>
 
   
